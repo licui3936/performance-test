@@ -11,7 +11,7 @@ require('../common/performance-constants.js');
 function waitForWindowCreated(promise, windowName) {
     globalThis.Perfs.creating(windowName);
     const createdPromise = promise()
-        .catch((error) => { 
+        .catch((error) => {
             console.error(`Error creating window ${windowName}:`, error);
         })
         .then(() => {
@@ -47,23 +47,27 @@ function waitForWindowLoaded(browserWindow, windowName) {
             found[eventName] = true;
             if (timedOut) return;
 
-            let timeout = globalThis.LONG_DELAY; // globalThis.MEASURE_EVENT_DELAY
+            // Check if all events have been received
             if (Object.keys(found).length === trackedEvents.length) {
-                globalThis.Perfs.log(windowName, `all window events received, timeout reduced`);
-                timeout = globalThis.SHORT_DELAY;
+                globalThis.Perfs.log(windowName, `all window events received, resolving immediately`);
+                timedOut = true;
+                // Clean up all listeners
+                trackedEvents.forEach(event => {
+                    browserWindow.removeListener(event, eventHandlers[event]);
+                });
+                resolve();
+                return;
             }
 
+            // Set timeout as fallback if not all events received yet
             timeoutId = setTimeout(() => {
-                globalThis.Perfs.log(windowName, `timeout`);
+                globalThis.Perfs.log(windowName, `timeout - not all events received`);
                 timedOut = true;
-                // trackedEvents.forEach(event => {
-                //    browserWindow.removeListener(event, didFinishLoadListener);
-                // });
                 browserWindow.removeListener(eventName, eventHandlers[eventName]);
                 resolve();
-            }, timeout);
+            }, globalThis.LONG_DELAY);
         }
-        
+
         trackedEvents.forEach(event => {
             eventHandlers[event] = makeListener(event);
             browserWindow.addListener(event, eventHandlers[event]);
@@ -77,13 +81,13 @@ function waitForWindowLoaded(browserWindow, windowName) {
  */
 function waitForViewLoaded(browserWindow, viewName, windowName) {
     return new Promise((resolve) => {
-        
+
         const trackedEvents = [
             'view-did-start-loading',
             'view-did-finish-load',
             'view-page-title-updated'
         ];
-        
+
         let timeoutId;
         let found = {};
         let timedOut = false;
@@ -101,18 +105,24 @@ function waitForViewLoaded(browserWindow, viewName, windowName) {
             found[eventName] = true;
             if (timedOut) return;
 
-            let timeout = globalThis.LONG_DELAY; // globalThis.MEASURE_EVENT_DELAY
+            // Check if all events have been received
             if (Object.keys(found).length === trackedEvents.length) {
-                globalThis.Perfs.log(windowName, `all view events received, timeout reduced`);
-                timeout = globalThis.SHORT_DELAY;
+                globalThis.Perfs.log(windowName, `all view events received, resolving immediately`);
+                timedOut = true;
+                // Clean up all listeners
+                trackedEvents.forEach(event => {
+                    browserWindow.removeListener(event, eventHandlers[event]);
+                });
+                resolve();
+                return;
             }
 
+            // Set timeout as fallback if not all events received yet
             timeoutId = setTimeout(() => {
-                globalThis.Perfs.log(windowName, `timeout`);
+                globalThis.Perfs.log(windowName, `timeout - not all view events received`);
                 timedOut = true;
-                // browserWindow.removeListener(eventName, eventHandlers[eventName]);
                 resolve();
-            }, timeout);
+            }, globalThis.LONG_DELAY);
         };
         trackedEvents.forEach(event => {
             eventHandlers[event] = makeListener(event);
