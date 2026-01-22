@@ -1,0 +1,9 @@
+{
+  "name": "perf",
+  "scripts": {
+    "install": "cd OpenFin && npm install && cd ../Electron && npm install",
+    "server": "cd OpenFin && npm run server",
+    "start-openfin": "cd OpenFin && npm run start --",
+    "start-electron": "cd Electron && npm run start --"
+  }
+}

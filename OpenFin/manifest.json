@@ -1,0 +1,20 @@
+{
+  "licenseKey": "d4d333fa-c496-44f1-ba5a-6e37655e1f20",
+  "runtime": {
+    "arguments": "--v=1",
+    "version": "42.138.102.4"
+  },
+  "platform": {
+    "uuid": "ten-windows-heavy-app",
+    "_autoShow": true,
+    "providerUrl": "http://localhost:3001/OpenFin/main.html",
+    "viewProcessAffinityStrategy": "different"
+  },
+  "shortcut": {
+    "company": "OpenFin",
+    "description": "Ten Windows Heavy App",
+    "icon": "https://openfin.co/favicon.ico",
+    "name": "Ten Windows App",
+    "target": []
+  }
+}

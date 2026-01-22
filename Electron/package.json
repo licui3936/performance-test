@@ -1,0 +1,25 @@
+{
+  "name": "ten-windows-electron-app",
+  "version": "1.0.0",
+  "description": "Electron Ten Windows Performance Test",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "electron",
+    "performance",
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "_devDependencies": {
+    "electron": "23.3.9-RFV.4"   
+  },
+  "devDependencies": {
+    "electron": "^37.10.1"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}

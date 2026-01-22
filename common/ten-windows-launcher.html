@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ten Windows Launcher</title>
+    <link rel="stylesheet" href="ten-windows-launcher.css">
+    <script src="performance-constants.js"></script>
+    <script src="utils.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="appTitle">Ten Windows Launcher</h1>
+
+        <div class="parameters">
+            <div class="parameters-panel">
+                Windows:
+                <span class="parameter-value" id="selectedCountLabel">10</span>
+                <button onclick="setCount(1)">1</button>
+                <button onclick="setCount(2)">2</button>
+                <button onclick="setCount(5)">5</button>
+                <button onclick="setCount(10)">10</button>
+                <button onclick="setCount(20)">20</button>
+                <button onclick="setCount(50)">50</button>
+            </div>
+            <div class="parameters-panel">
+                Delay:
+                <span class="parameter-value" id="selectedDelayLabel">0</span>
+                <button onclick="setDelay(0)">0</button>
+                <button onclick="setDelay(500)">500</button>
+                <button onclick="setDelay(1000)">1000</button>
+                <button onclick="setDelay(2000)">2000</button>
+                <button onclick="setDelay(5000)">5000</button>
+            </div>
+            <button onclick="reset()">Reset Stats</button>
+        </div>
+
+        <div class="windows-test-row">
+            <h3>Windows Performance Tests</h3>
+            <button class="launch_btn" id="launchBtn" onclick="onLaunchWindows()">Launch Site Windows</button>
+            <button class="launch_btn" id="launchBrowserBtn" onclick="onLaunchBrowserWindows()">Launch Site Browser Windows</button>
+            <br/>
+            <button class="launch_btn" id="launchBlankBtn" onclick="onLaunchBlankWindows()">Launch Blank (iframes) Windows</button>
+            <button class="launch_btn" id="launchBlankBrowserBtn" onclick="onLaunchBlankBrowserWindows()">Launch Blank (iframes) Browser Windows</button>
+            <br/>
+            <button class="launch_btn" id="launchExampleBtn" onclick="onLaunchExampleWindows()">Launch Example Windows</button>
+            <button class="launch_btn" id="launchExampleBrowserBtn" onclick="onLaunchExampleBrowserWindows()">Launch Example Browser Windows</button>
+            <br/>
+            <button id="closeBtn" onclick="onCloseAllWindows()">Close All Windows</button>
+        </div>
+        
+        <div class="layout-panel">
+            <h3>Layout & Login Tests</h3>
+            <button id="loginBtn" onclick="onOpenLoginWindow()">Login to Workspace</button>
+            <button id="launchLayoutBtn" onclick="onLaunchLayoutWindows()">Launch Layout Windows</button>
+        </div>
+        
+        <div>
+            <button id="downloadBtn" onclick="onDownloadPerformanceData()" disabled>Download JSON Data</button>
+        </div>
+        
+        <div id="status">
+            <p>Click "Launch Windows" to start...</p>
+        </div>
+    </div>
+
+    <script src="ten-windows-launcher.js"></script>
+</body>
+</html>
