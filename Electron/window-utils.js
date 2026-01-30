@@ -24,10 +24,7 @@ function waitForWindowLoaded(browserWindow, windowName) {
     return new Promise((resolve) => {
 
         const trackedEvents = [
-            'did-start-loading',
-            'did-finish-load',
-            'page-title-updated',
-            'page-favicon-updated'
+            'did-finish-load'
         ];
 
         let timeoutId;
@@ -83,9 +80,7 @@ function waitForViewLoaded(browserWindow, viewName, windowName) {
     return new Promise((resolve) => {
 
         const trackedEvents = [
-            'view-did-start-loading',
-            'view-did-finish-load',
-            'view-page-title-updated'
+            'view-did-finish-load'
         ];
 
         let timeoutId;

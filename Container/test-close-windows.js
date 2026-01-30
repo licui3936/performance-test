@@ -13,34 +13,29 @@ async function handleCloseWindows(targetIdentity, testState, sendStatus) {
                         globalThis.Perfs.closed(windowName);
                         sendStatus(targetIdentity, { type: 'success', message: `✓ Window ${windowName} closed` });
                         resolve();
-                   });
+                    });
                 });
 
                 closedPromises.push(closedPromise);
                 globalThis.Perfs.closing(windowName);
                 window.close(true);
-            }
-            catch (error) {
+            } catch (error) {
                 sendStatus(targetIdentity, { type: 'error', message: `⚠ Window ${windowName} already closed or error: ${error.message}` });
             }
         });
-        
-        // Wait for all closed events
+
         await Promise.all(closedPromises);
-        
+
         testState.windows = new Map();
 
         globalThis.Perfs.doneClose();
-        sendStatus(targetIdentity, { type: 'success', message: '✓ All windows closed', summary: globalThis.Perfs.summary(), completed: true, });
-
-    }
-    catch (error) {
+        sendStatus(targetIdentity, { type: 'success', message: '✓ All windows closed', summary: globalThis.Perfs.summary(), completed: true });
+    } catch (error) {
         console.error('Error closing windows:', error);
         sendStatus(targetIdentity, { type: 'error', message: `❌ Error closing windows: ${error.message}` });
     }
 }
 
-// Export for browser context
 if (typeof window !== 'undefined') {
     window.closeWindows = {
         handleCloseWindows

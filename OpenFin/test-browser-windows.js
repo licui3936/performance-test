@@ -33,7 +33,7 @@ async function handleLaunchBrowserWindows(targetIdentity, testState, sendStatus,
             const browserOptions = {
                 name: browserName,
                 defaultWidth: 800,
-                defaultHeight: 600,
+                defaultHeight: 400,
                 defaultLeft: 50 + (i * 50),
                 defaultTop: 50 + ((i % 5) * 50),
                 defaultCentered: false,

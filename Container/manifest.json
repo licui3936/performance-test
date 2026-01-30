@@ -3,20 +3,20 @@
   "runtime": {
     "arguments": "--v=1",
     "version0": "42.138.102.4",
-    "version": "42.138.103.2",
-    "version2": "43.142.101.2"
+    "version1": "42.138.103.2",
+    "version": "43.142.101.2"
   },
   "platform": {
-    "uuid": "ten-windows-heavy-app",
+    "uuid": "ten-windows-container-app",
     "_autoShow": true,
-    "providerUrl": "http://localhost:3001/OpenFin/main.html",
+    "providerUrl": "http://localhost:3001/Container/main.html",
     "viewProcessAffinityStrategy": "different"
   },
   "shortcut": {
     "company": "OpenFin",
-    "description": "Ten Windows Heavy App",
+    "description": "Ten Windows Container (Core API)",
     "icon": "https://openfin.co/favicon.ico",
-    "name": "Ten Windows App",
+    "name": "Ten Windows Container",
     "target": []
   }
 }

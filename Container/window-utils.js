@@ -1,8 +1,5 @@
-// Window utility functions for OpenFin performance tests
-/**
- * Creates a promise that resolves when a webcontent (window or view) finishes loading
- * Manages performance marking and measurement for loading events
- */
+// Window utility functions for Container (Core API) performance tests
+
 function waitForWindowCreated(promise, windowName) {
     globalThis.Perfs.creating(windowName);
     const createdPromise = promise()
@@ -17,11 +14,7 @@ function waitForWindowCreated(promise, windowName) {
 
 function waitForWindowLoaded(webcontent, windowName) {
     return new Promise((resolve) => {
-
-        const trackedEvents = [
-            'did-finish-load'
-        ];
-
+        const trackedEvents = ['did-finish-load'];
         let timeoutId;
         let found = {};
         let timedOut = false;
@@ -37,11 +30,9 @@ function waitForWindowLoaded(webcontent, windowName) {
             found[payload.type] = true;
             if (timedOut) return;
 
-            // Check if all events have been received
             if (Object.keys(found).length === trackedEvents.length) {
                 globalThis.Perfs.log(windowName, `all window events received, resolving immediately`);
                 timedOut = true;
-                // Clean up all listeners
                 trackedEvents.forEach(event => {
                     webcontent.removeListener(event, didFinishLoadListener);
                 });
@@ -49,13 +40,12 @@ function waitForWindowLoaded(webcontent, windowName) {
                 return;
             }
 
-            // Set timeout as fallback if not all events received yet
             timeoutId = setTimeout(() => {
                 globalThis.Perfs.log(windowName, `timeout - not all events received`);
                 timedOut = true;
                 resolve();
             }, globalThis.LONG_DELAY);
-        }
+        };
 
         trackedEvents.forEach(event => {
             webcontent.addListener(event, didFinishLoadListener);
@@ -65,12 +55,7 @@ function waitForWindowLoaded(webcontent, windowName) {
 
 function waitForViewLoaded(webcontent, viewName, windowName) {
     return new Promise((resolve) => {
-
-        const trackedEvents = [
-            // 'start-loading',
-            'did-finish-load'
-        ];
-
+        const trackedEvents = ['did-finish-load'];
         let timeoutId;
         let found = {};
         let timedOut = false;
@@ -81,16 +66,14 @@ function waitForViewLoaded(webcontent, viewName, windowName) {
                 timeoutId = null;
             }
 
-            let eventType = timedOut ? `${payload.type} (late)` : payload.type;
+            const eventType = timedOut ? `${payload.type} (late)` : payload.type;
             globalThis.Perfs.viewEvent(windowName, eventType);
             found[payload.type] = true;
             if (timedOut) return;
 
-            // Check if all events have been received
             if (Object.keys(found).length === trackedEvents.length) {
                 globalThis.Perfs.log(windowName, `all view events received, resolving immediately`);
                 timedOut = true;
-                // Clean up all listeners
                 trackedEvents.forEach(event => {
                     webcontent.removeListener(event, didFinishLoadListener);
                 });
@@ -98,13 +81,12 @@ function waitForViewLoaded(webcontent, viewName, windowName) {
                 return;
             }
 
-            // Set timeout as fallback if not all events received yet
             timeoutId = setTimeout(() => {
                 globalThis.Perfs.log(windowName, `timeout - not all view events received`);
                 timedOut = true;
                 resolve();
             }, globalThis.LONG_DELAY);
-        }
+        };
 
         trackedEvents.forEach(event => {
             webcontent.addListener(event, didFinishLoadListener);
@@ -112,7 +94,6 @@ function waitForViewLoaded(webcontent, viewName, windowName) {
     });
 }
 
-// Export for browser context
 if (typeof window !== 'undefined') {
     window.windowUtils = {
         waitForWindowCreated,

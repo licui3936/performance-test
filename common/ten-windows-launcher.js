@@ -308,10 +308,13 @@ async function init() {
         // Set platform API
         platformAPI = PlatformAPI[platform];
         
-        // Update title with platform badge
+        // Update title with platform badge (Container vs OpenFin/WorkspacePlatform)
         const title = document.getElementById('appTitle');
-        const platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
-        title.innerHTML = `${platformName} Ten Windows Launcher <span class="platform-badge">${platformName}</span>`;
+        let platformDisplayName = platform.charAt(0).toUpperCase() + platform.slice(1);
+        if (platform === 'openfin' && typeof window !== 'undefined' && window.location.search.includes('platform=container')) {
+            platformDisplayName = 'Container';
+        }
+        title.innerHTML = `${platformDisplayName} Ten Windows Launcher <span class="platform-badge">${platformDisplayName}</span>`;
         
         // Set up status listener
         setupStatusListener();

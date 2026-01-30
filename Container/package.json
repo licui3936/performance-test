@@ -1,0 +1,15 @@
+{
+  "name": "ten-windows-container-app",
+  "type": "module",
+  "scripts": {
+    "server": "http-server ../ -p 3001 -c-1",
+    "start": "openfin -l --config=./manifest.json"
+  },
+  "dependencies": {
+    "@openfin/core": "43.101.2"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "openfin-cli": "^4.0.0"
+  }
+}
