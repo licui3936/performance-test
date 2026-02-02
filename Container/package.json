@@ -6,7 +6,7 @@
     "start": "openfin -l --config=./manifest.json"
   },
   "dependencies": {
-    "@openfin/core": "43.101.2"
+    "@openfin/core": "42.103.4"
   },
   "devDependencies": {
     "http-server": "^14.1.1",
