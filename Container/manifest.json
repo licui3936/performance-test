@@ -9,11 +9,11 @@
   "platform": {
     "uuid": "ten-windows-container-app",
     "_autoShow": true,
-    "enableApiLogging": false,
+    "enableAppLogging": false,
     "providerUrl": "http://localhost:3001/Container/main.html",
     "viewProcessAffinityStrategy": "different",
     "defaultWindowOptions": {
-      "enableApiLogging": false
+      "enableAppLogging": false
     },
     "defaultViewOptions": {
       "api": {
