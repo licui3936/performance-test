@@ -161,26 +161,29 @@ const Perfs = {
         const created = measuresArray.map(measure => measure.created).filter(v => v !== undefined);
         if (created.length) {
             const maxCreated = Math.max(...created);
-            const avgCreated = Math.round(maxCreated / created.length);
-            summary.push(`${data.testName} - Time to create ${created.length} windows: ${maxCreated} ms (avg: ${avgCreated} ms)`);
+            const sumCreated = created.reduce((a, b) => a + b, 0);
+            const avgCreated = Math.round(sumCreated / created.length);
+            summary.push(`${data.testName} - Time to create ${created.length} windows: ${maxCreated} ms (max) (avg: ${avgCreated} ms)`);
             data.summary.totalCreationTime = maxCreated;
-            data.summary.averageCreationTime = avgCreated; 
+            data.summary.averageCreationTime = avgCreated;
         }
 
         const loaded = measuresArray.map(measure => measure.loaded).filter(v => v !== undefined);
         if (loaded.length) {
             const maxLoaded = Math.max(...loaded);
-            const avgLoaded = Math.round(maxLoaded / loaded.length);
-            summary.push(`${data.testName} - Time to load ${loaded.length} windows: ${maxLoaded} ms (avg: ${avgLoaded} ms)`);
+            const sumLoaded = loaded.reduce((a, b) => a + b, 0);
+            const avgLoaded = Math.round(sumLoaded / loaded.length);
+            summary.push(`${data.testName} - Time to load ${loaded.length} windows: ${maxLoaded} ms (max) (avg: ${avgLoaded} ms)`);
             data.summary.totalLoadingTime = maxLoaded;
-            data.summary.averageLoadingTime = avgLoaded; 
+            data.summary.averageLoadingTime = avgLoaded;
         }
 
         const closed = measuresArray.map(measure => measure.closed).filter(v => v !== undefined);
         if (closed.length) {
             const maxClosed = Math.max(...closed);
-            const avgClosed = Math.round(maxClosed / closed.length);
-            summary.push(`${data.testName} - Time to close ${closed.length} windows: ${maxClosed} ms (avg: ${avgClosed} ms)`);
+            const sumClosed = closed.reduce((a, b) => a + b, 0);
+            const avgClosed = Math.round(sumClosed / closed.length);
+            summary.push(`${data.testName} - Time to close ${closed.length} windows: ${maxClosed} ms (max) (avg: ${avgClosed} ms)`);
             data.summary.totalClosingTime = maxClosed;
             data.summary.averageClosingTime = avgClosed;
         }
