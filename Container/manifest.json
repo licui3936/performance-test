@@ -1,16 +1,27 @@
 {
   "licenseKey": "d4d333fa-c496-44f1-ba5a-6e37655e1f20",
   "runtime": {
-    "arguments": "--v=1",
+    "arguments": "--v=1 --trace-startup --trace-startup-file=c:/tmp/test/test.json",
     "version0": "42.138.102.4",
-    "version": "42.138.103.2",
-    "version1": "43.142.101.2"
+    "version": "42.138.103.4",
+    "version1": "40.130.101.1"
   },
   "platform": {
     "uuid": "ten-windows-container-app",
     "_autoShow": true,
+    "enableApiLogging": false,
     "providerUrl": "http://localhost:3001/Container/main.html",
-    "viewProcessAffinityStrategy": "different"
+    "viewProcessAffinityStrategy": "different",
+    "defaultWindowOptions": {
+      "enableApiLogging": false
+    },
+    "defaultViewOptions": {
+      "api": {
+        "iframe": {
+          "sameOriginInjection": false
+        }
+      }
+    }
   },
   "shortcut": {
     "company": "OpenFin",

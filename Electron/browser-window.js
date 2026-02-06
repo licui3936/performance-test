@@ -25,7 +25,10 @@ class ElectronBrowserWindow extends EventEmitter {
             show: true,
             frame: true,
             webPreferences: {
+                devTools: true,
+                enableRemoteModule: true,
                 nodeIntegration: false,
+                nodeIntegrationInSubFrames: true,
                 contextIsolation: true,
                 preload: path.join(__dirname, 'tab-bar-preload.js')
             }
@@ -62,8 +65,12 @@ class ElectronBrowserWindow extends EventEmitter {
     async createTab(viewName, url, tabIndex) {
         const view = new BrowserView({
             webPreferences: {
+                devTools: true,
+                enableRemoteModule: true,
                 nodeIntegration: false,
-                contextIsolation: true
+                contextIsolation: true,
+                nodeIntegrationInSubFrames: true,
+                preload: path.join(__dirname, 'preload.js')
             }
         });
 
@@ -97,6 +104,9 @@ class ElectronBrowserWindow extends EventEmitter {
             const title = view.webContents.getTitle();
             tab.title = title || tab.title;
             this.updateTabBar();
+        });
+        view.webContents.on('context-menu', () => {
+            view.webContents.openDevTools();
         });
         view.webContents.loadURL(url);
     }

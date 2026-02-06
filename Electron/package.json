@@ -4,7 +4,7 @@
   "description": "Electron Ten Windows Performance Test",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron . --trace-startup --trace-startup-file=c:/tmp/test/electron-test.json"
   },
   "keywords": [
     "electron",

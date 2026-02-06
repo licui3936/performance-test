@@ -32,7 +32,7 @@ async function handleLaunchBrowserWindows(testState, sendStatus, { content }) {
         const makePromise = (i) => {
             const browserName = `browser-window-${testState.id}-${i + 1}`;
             const viewName = `browser-view-${testState.id}-${i + 1}`;
-            const url = content === 'blank' ? pathToFileURL(path.join(__dirname, '../common/blank.html')).href
+            const url = content === 'blank' ? 'http://localhost:3001/common/blank.html'
                       : content === 'example' ? 'https://www.example.com'
                       : content === 'layout' ? 'https://workspace.refinitiv.com/web'
                       : testState.heavySites[i % testState.heavySites.length];            
